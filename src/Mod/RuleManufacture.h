@@ -22,6 +22,7 @@
 #include "../Engine/Yaml.h"
 #include <stdint.h>
 #include "RuleBaseFacilityFunctions.h"
+#include "../Savegame/WeightedOptions.h"  // for spawnedRandomEvent
 
 namespace OpenXcom
 {
@@ -51,6 +52,7 @@ private:
 	std::string _spawnedPersonType, _spawnedPersonName;
 	YAML::YamlString _spawnedSoldier;
 	std::string _spawnedEvent;
+	WeightedOptions _spawnedRandomEvent;
 	std::vector<std::string> _requiresName;
 	RuleBaseFacilityFunctions _requiresBaseFunc;
 	std::vector<const RuleResearch*> _requires;
@@ -119,6 +121,8 @@ public:
 	const YAML::YamlString& getSpawnedSoldierTemplate() const { return _spawnedSoldier; }
 	/// Gets the geoscape event to spawn when one unit of this project is produced.
 	const std::string& getSpawnedEvent() const { return _spawnedEvent; }
+	/// Gets a random geoscape event to spawn when one unit of this project is produced. Only runs if getSpawnedEvent() returns empty string.
+	std::string chooseSpawnedRandomEvent() const { return _spawnedRandomEvent.choose(); }
 	/// Is it possible to use auto-sell feature for this manufacturing project?
 	bool canAutoSell() const;
 	/// Gets the transfer time info.

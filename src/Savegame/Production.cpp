@@ -316,6 +316,19 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 					g->spawnEvent(eventRules);
 				}
 			}
+			// Spawn random geoscape event - only if no fixed event is set
+			if (_rules->getSpawnedEvent().empty())
+			{
+				const std::string randomEventChoice = _rules->chooseSpawnedRandomEvent();
+				if (!randomEventChoice.empty())
+				{
+					const RuleEvent* eventRules = m->getEvent(randomEventChoice, true);
+					if (eventRules)
+					{
+						g->spawnEvent(eventRules);
+					}
+				}
+			}
 			if (_rules->getPoints() != 0)
 			{
 				// yes, negative points are allowed too
