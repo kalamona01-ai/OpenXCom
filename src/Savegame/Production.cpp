@@ -21,6 +21,7 @@
 #include "../Engine/Collections.h"
 #include "../Mod/RuleManufacture.h"
 #include "../Mod/RuleSoldier.h"
+#include "../Mod/RuleEvent.h"
 #include "Base.h"
 #include "SavedGame.h"
 #include "Transfer.h"
@@ -304,6 +305,15 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 						t->setSoldier(s);
 						b->getTransfers()->push_back(t);
 					}
+				}
+			}
+			// Spawn geoscape event
+			if (!_rules->getSpawnedEvent().empty())
+			{
+				const RuleEvent* eventRules = m->getEvent(_rules->getSpawnedEvent(), true);
+				if (eventRules)
+				{
+					g->spawnEvent(eventRules);
 				}
 			}
 			if (_rules->getPoints() != 0)

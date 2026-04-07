@@ -50,6 +50,7 @@ private:
 	std::string _name, _category;
 	std::string _spawnedPersonType, _spawnedPersonName;
 	YAML::YamlString _spawnedSoldier;
+	std::string _spawnedEvent;
 	std::vector<std::string> _requiresName;
 	RuleBaseFacilityFunctions _requiresBaseFunc;
 	std::vector<const RuleResearch*> _requires;
@@ -116,6 +117,8 @@ public:
 	const std::string &getSpawnedPersonName() const;
 	/// Gets the spawned soldier template.
 	const YAML::YamlString& getSpawnedSoldierTemplate() const { return _spawnedSoldier; }
+	/// Gets the geoscape event to spawn when one unit of this project is produced.
+	const std::string& getSpawnedEvent() const { return _spawnedEvent; }
 	/// Is it possible to use auto-sell feature for this manufacturing project?
 	bool canAutoSell() const;
 	/// Gets the transfer time info.
