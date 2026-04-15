@@ -73,6 +73,8 @@ void RuleManufacture::load(const YAML::YamlNodeReader& node, Mod* mod)
 		_spawnedRandomEvent.load(reader["spawnedRandomEvent"]);
 	}
 	reader.tryRead("transferTimes", _transferTimes);
+	mod->loadUnorderedNames(_name, _decreaseCounter, reader["decreaseCounter"]);
+	mod->loadUnorderedNames(_name, _increaseCounter, reader["increaseCounter"]);
 	reader.tryRead("listOrder", _listOrder);
 }
 

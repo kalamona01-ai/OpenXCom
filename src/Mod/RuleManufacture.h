@@ -53,6 +53,7 @@ private:
 	YAML::YamlString _spawnedSoldier;
 	std::string _spawnedEvent;
 	WeightedOptions _spawnedRandomEvent;
+	std::vector<std::string> _decreaseCounter, _increaseCounter;
 	std::vector<std::string> _requiresName;
 	RuleBaseFacilityFunctions _requiresBaseFunc;
 	std::vector<const RuleResearch*> _requires;
@@ -123,6 +124,10 @@ public:
 	const std::string& getSpawnedEvent() const { return _spawnedEvent; }
 	/// Gets a random geoscape event to spawn when one unit of this project is produced. Only runs if getSpawnedEvent() returns empty string.
 	std::string chooseSpawnedRandomEvent() const { return _spawnedRandomEvent.choose(); }
+	/// Gets the name of custom counter variables to decrease when one unit of this project is produced.
+	const std::vector<std::string>& getDecreaseCounter() const { return _decreaseCounter; }
+	/// Gets the name of custom counter variables to increase when one unit of this project is produced.
+	const std::vector<std::string>& getIncreaseCounter() const { return _increaseCounter; }
 	/// Is it possible to use auto-sell feature for this manufacturing project?
 	bool canAutoSell() const;
 	/// Gets the transfer time info.

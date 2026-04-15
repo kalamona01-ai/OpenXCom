@@ -334,6 +334,15 @@ productionProgress_e Production::step(Base * b, SavedGame * g, const Mod *m, Lan
 				// yes, negative points are allowed too
 				g->addResearchScore(_rules->getPoints());
 			}
+			// Handle custom counters
+			for (const auto& inc : _rules->getIncreaseCounter())
+			{
+				g->increaseCustomCounter(inc);
+			}
+			for (const auto& dec : _rules->getDecreaseCounter())
+			{
+				g->decreaseCustomCounter(dec);
+			}
 			count++;
 			if (count < produced)
 			{
